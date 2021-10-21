@@ -18,7 +18,7 @@ public class boxSounds : MonoBehaviour
         if (rigid.velocity.x > 0.1 || rigid.velocity.x < -0.1)
         {
             if (!audioSource.isPlaying) audioSource.Play();
-            float volumen = rigid.velocity.x;
+            //float _volumen = rigid.velocity.x;
 
 
         }

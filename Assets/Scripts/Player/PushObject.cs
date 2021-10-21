@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using GrappleHook.util;
 
 public class PushObject : MonoBehaviour
 {
@@ -13,17 +14,11 @@ public class PushObject : MonoBehaviour
 
     public void EnableMoveBoxes()
     {
-        foreach (var block in Blocks)
-        {
-            if (block) block.bodyType = RigidbodyType2D.Dynamic;
-        }
+        BoxUpdateEvent.ActiveBoxPhysics();
     }
 
     public void DisableMoveBoxes()
     {
-        foreach (var block in Blocks)
-        {
-            if (block) block.bodyType = RigidbodyType2D.Static;
-        }
+        BoxUpdateEvent.DeactiveBoxPhysics();
     }
 }

@@ -68,7 +68,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -80,7 +80,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -92,7 +92,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -141,10 +141,18 @@ TextureImporter:
       - {x: -68, y: 156}
       - {x: -198, y: 156}
       - {x: -198, y: 102}
+      - {x: -212, y: 102}
+      - {x: -212, y: 105}
+      - {x: -216, y: 105}
+      - {x: -216, y: 102}
+      - {x: -287, y: 102}
+      - {x: -287, y: 104}
+      - {x: -291, y: 104}
+      - {x: -291, y: 102}
       - {x: -303, y: 102}
       - {x: -303, y: 155}
-      - {x: -363, y: 155}
-      - {x: -363, y: 215}
+      - {x: -362, y: 155}
+      - {x: -362, y: 215}
       - {x: 360, y: 215}
       - {x: 360, y: 44}
       - {x: 145, y: 45}
@@ -178,7 +186,7 @@ TextureImporter:
       - {x: -209, y: -158}
       - {x: -209, y: -171}
       - {x: -1, y: -171}
-      - {x: -2, y: -94}
+      - {x: -1, y: -94}
       - {x: 274, y: -94}
       - {x: 274, y: -82}
       - {x: 151, y: -82}
@@ -210,27 +218,26 @@ TextureImporter:
       - {x: -243, y: -238}
       - {x: -243, y: -243}
       - {x: -276, y: -243}
-    - - {x: 32, y: -214}
-      - {x: 32, y: -237}
-      - {x: 140, y: -237}
-      - {x: 140, y: -224}
-      - {x: 104, y: -214}
-    - - {x: 205, y: -214}
-      - {x: 205, y: -229}
-      - {x: 262, y: -229}
-      - {x: 262, y: -214}
+    - - {x: 34, y: -216}
+      - {x: 34, y: -226}
+      - {x: 85, y: -226}
+      - {x: 85, y: -235}
+      - {x: 138, y: -235}
+      - {x: 138, y: -226}
+      - {x: 86, y: -226}
+      - {x: 86, y: -216}
+    - - {x: 207, y: -216}
+      - {x: 207, y: -227}
+      - {x: 260, y: -227}
+      - {x: 260, y: -216}
     - - {x: -180, y: -190}
       - {x: -180, y: -220}
       - {x: -25, y: -220}
       - {x: -25, y: -190}
-    - - {x: 155, y: -196}
-      - {x: 153, y: -198}
-      - {x: 153, y: -209}
-      - {x: 155, y: -211}
-      - {x: 209, y: -211}
-      - {x: 211, y: -209}
-      - {x: 211, y: -198}
-      - {x: 209, y: -196}
+    - - {x: 155, y: -198}
+      - {x: 155, y: -209}
+      - {x: 209, y: -209}
+      - {x: 209, y: -198}
     - - {x: 312, y: -45}
       - {x: 312, y: -79}
       - {x: 321, y: -79}

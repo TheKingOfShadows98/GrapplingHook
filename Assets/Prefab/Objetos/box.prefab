@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 944588407896398547}
   - component: {fileID: 944588407896398544}
   - component: {fileID: 3296665217266431150}
+  - component: {fileID: 1422044634416247233}
   - component: {fileID: 944588407896398549}
   - component: {fileID: 944588407896398546}
   - component: {fileID: 2869876393963381118}
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: c8d0ce48099982645aa88e18f61a0644, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -101,6 +102,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 2869876393963381118}
   dropSource: {fileID: 4441883368105104398}
+--- !u!114 &1422044634416247233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944588407896398545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a060cfa160efe84eb8ff9a97ba29bf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &944588407896398549
 BoxCollider2D:
   m_ObjectHideFlags: 0

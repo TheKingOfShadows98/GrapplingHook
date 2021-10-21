@@ -13,11 +13,14 @@ public class FallLimit : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Vector3 velocity = rig.velocity;
-        if(Mathf.Abs(velocity.y) > Config.FALL_SPEED_LIMIT)
+        if(rig.bodyType != RigidbodyType2D.Static)
         {
-            velocity.y = velocity.y > 0 ? Config.FALL_SPEED_LIMIT : -Config.FALL_SPEED_LIMIT;
+            Vector3 velocity = rig.velocity;
+            if(Mathf.Abs(velocity.y) > Config.FALL_SPEED_LIMIT)
+            {
+                velocity.y = velocity.y > 0 ? Config.FALL_SPEED_LIMIT : -Config.FALL_SPEED_LIMIT;
+            }
+            rig.velocity = velocity;
         }
-        rig.velocity = velocity;
     }
 }

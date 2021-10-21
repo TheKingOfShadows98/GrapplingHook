@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("Script de mecanica de Gancho")] private GanchoMechanic ganchoMechanic;
     [SerializeField, Tooltip("Script de mecanica de Guantes")] private PushObject pushMechanic;
     [SerializeField, Tooltip("Sprite Renderer")] private SpriteRenderer spriteRenderer;
-
+    [SerializeField] private BackGround bgColorChanger;
     [Header("Variables [solo para info]")]
     [SerializeField, Tooltip("Mecanica activa \n||Guantes \n|Gancho \n|2: Arma \n"), ReadOnly] private PowerUps activeMechanic;
 
@@ -70,16 +70,23 @@ public class PlayerController : MonoBehaviour
                     {
                         // no entra
                         pushMechanic.EnableMoveBoxes();
+                        bgColorChanger.ChangeHand();
                         break;
                     }
                 case PowerUps.Hook:
                     {
                         ganchoMechanic.enabled = true;
+                        bgColorChanger.ChangeGrapple();
                         break;
                     }
                 case PowerUps.Betsy:
                     {
                         weaponMechanic.enabled = true;
+                        bgColorChanger.ChangeBetsi();
+                        break;
+                    }
+                default: {
+                        bgColorChanger.ChangeNothing();
                         break;
                     }
             }
@@ -122,7 +129,7 @@ public class PlayerController : MonoBehaviour
         pushMechanic = !pushMechanic ? GetComponent<PushObject>() : pushMechanic;
         weaponMechanic = !weaponMechanic ? GetComponent<WeaponMechanic>() : weaponMechanic;
 
-        ChangeBuff(PowerUps.Guantes);
+        ChangeBuff(PowerUps.Nothing);
     }
 }
 

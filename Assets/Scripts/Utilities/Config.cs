@@ -23,7 +23,26 @@ namespace GrappleHook.util
 
         public static Color ColorDisable = new Color(0.75f, 0.75f, 0.75f);
     }
- 
+    public static class BoxUpdateEvent
+    {
+        public static System.Action onActivePhysics;
+        public static System.Action onDeactivePhysics;
+
+        public static void ActiveBoxPhysics()
+        {
+            if(onActivePhysics != null)
+            {
+                onActivePhysics.Invoke();
+            }
+        }
+        public static void DeactiveBoxPhysics()
+        {
+            if (onDeactivePhysics != null)
+            {
+                onDeactivePhysics.Invoke();
+            }
+        }
+    }
 
     public enum GameStates
     {
@@ -35,7 +54,8 @@ namespace GrappleHook.util
     {
         Guantes,
         Betsy,
-        Hook
+        Hook,
+        Nothing
     }
     public class ReadOnlyAttribute : PropertyAttribute
     {
