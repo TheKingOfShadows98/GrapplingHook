@@ -1,108 +1,61 @@
-using GrappleHook.util;
-using System.Collections;
 using UnityEngine;
 
-public class Movimiento : MonoBehaviour
+namespace GrapplingHook.Player
 {
-    [Header("Componentes")]
-    [SerializeField, Tooltip("Controlador del Jugador")] private PlayerController playerController;
-
-    [SerializeField, Tooltip("RigidBody 2d del Jugador")] public Rigidbody2D rig;
-
-    [Header("Atributos")]
-    [SerializeField, Tooltip("Unidades por segundo de desplazamiento")] private float speed;
-
-    [SerializeField, Tooltip("Fuerza del salto")] private float jumpForce;
-    [SerializeField, Tooltip("Altura Maxima del salto")] private float maxHeightJump;
-    [SerializeField, Tooltip("Tiempo maximo en el aire")] private float jumpTime;
-
-    [SerializeField, Tooltip("Posicion de los pies")] private Vector3 footPositonA;
-    [SerializeField, Tooltip("Posicion de los pies")] private Vector3 footPositonB;
-
-    [SerializeField, Tooltip("Layers interpretadas como suelos")] private LayerMask layersColliders;
-
-    [Header("Variables [No Tocar, solo para info]")]
-    [SerializeField, Tooltip("Coord del ultimo toque de algo solido"), ReadOnly] private float lastTouchGroundHigh;
-
-    [SerializeField, Tooltip("Distancia de reconocimiento del suelo"), ReadOnly] private float jumpAreaDetection = 0.05f;
-    [SerializeField] private bool jumping;
-    [SerializeField] private bool freeze;
-
-    public void FreezeMovement(bool _freeze)
+    public class Movimiento : MonoBehaviour
     {
-        rig.bodyType = _freeze ? RigidbodyType2D.Static : RigidbodyType2D.Dynamic;
-        freeze = _freeze;
-    }
+        [field: SerializeField] private float Speed { get; set; }
+        [field: SerializeField] private Rigidbody2D Rig { get; set; }
 
-    private void OnEnable()
-    {
-        // asigna el rigidbody si no esta asignado ya.
-        if (!playerController) playerController = GetComponent<PlayerController>();
-        if (!rig) rig = GetComponent<Rigidbody2D>();
-    }
+        [SerializeField] Animator animator;
+        [SerializeField] private SaltoP saltCC;
 
-    private void Update()
-    {
-        if (!(GameManager.instance.gameState != GameStates.playing || freeze))
+        [SerializeField] private AudioSource audioSource;
+
+        [SerializeField] private ParticleSystem walkingParticles;
+
+
+        private void Update()
         {
-            Move();
-            Jump();
-        }
-    }
-
-    private void Move()
-    {
-        int dirRaw = Mathf.FloorToInt(Input.GetAxisRaw(Config.AXIS_X));
-        float dir = Input.GetAxis(Config.AXIS_X);
-        if (dirRaw != 0)
-        {
-            if (playerController.GetAction() != 2 && playerController.GetAction() != 1) playerController.SetAction(1);
-            if (playerController.GetFacing() != dirRaw) playerController.SetFacing(dirRaw);
-        }
-        else
-        {
-            if (playerController.GetAction() != 2) playerController.SetAction(0);
-        }
-        rig.velocity = new Vector2(dir * speed, rig.velocity.y);
-    }
-
-    private void Jump()
-    {
-        Collider2D hit = Physics2D.OverlapArea(new Vector2(footPositonA.x, footPositonA.y + jumpAreaDetection / 2) + (Vector2)transform.position, new Vector2(footPositonB.x, footPositonA.y - jumpAreaDetection / 2) + (Vector2)transform.position, layersColliders);
-        if (hit != null)
-            if (Input.GetButtonDown(Config.BUTTON_JUMP) && hit.CompareTag(Config.TAG_SOLID))
+            bool idle = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")) == 0;
+            animator.SetBool("Walk", !idle);
+            if (Input.GetButton("Horizontal") && saltCC.stayGround() && !audioSource.isPlaying)
             {
-                playerController.SetAction(2);
-                jumping = true;
-                lastTouchGroundHigh = transform.position.y;
-                StartCoroutine(ISalto());
+                walkingParticles.Play();
+                audioSource.Play();
             }
-
-        if (Input.GetButtonUp(Config.BUTTON_JUMP))
-        {
-            jumping = false;
+            if (!saltCC.stayGround() || idle) {
+                walkingParticles.Stop();
+                audioSource.Stop(); 
+            }
+            
         }
-    }
-
-    private IEnumerator ISalto()
-    {
-        float airTime = 0;
-
-        while (jumping)
+        private void FixedUpdate()
         {
-            float force = jumpForce * (1 - (transform.position.y - lastTouchGroundHigh) / maxHeightJump);
-            rig.velocity = new Vector2(rig.velocity.x, force);
-            if (airTime >= jumpTime)
+            if (Input.GetButton("Horizontal"))
             {
-                jumping = false;
+                if(Input.GetAxis("Horizontal") >= 0) transform.rotation = Quaternion.Euler(Vector2.up * 0);
+
+                else transform.rotation = Quaternion.Euler(Vector2.up * 180);
+
             }
-            else
-            {
-                airTime += Time.deltaTime;
-            }
-            yield return new WaitForEndOfFrame();
+            MovePlayer();
         }
-        playerController.SetAction(0);
-        yield return null;
+
+        public void MovePlayer()
+        {
+            var _vector = Rig.velocity;
+            var _speedx = Mathf.Abs(Input.GetAxis("Horizontal")) * Speed;
+            var _vectorSpeed = (Vector2)transform.right * _speedx;
+            _vector.x = _vectorSpeed.x;
+
+            Rig.velocity = _vector;
+        }
+        public void Dash(float force)
+        {
+            var _vector = Rig.velocity;
+            _vector.x = force * transform.right.x;
+            Rig.velocity = _vector;
+        }
     }
 }

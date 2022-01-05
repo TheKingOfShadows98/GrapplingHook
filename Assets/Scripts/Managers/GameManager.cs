@@ -1,35 +1,29 @@
-using GrappleHook.util;
-using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using GrapplingHook.Player;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
-    public GameStates gameState;
-    public Dictionary<PowerUps, bool> powerUps;
-    public GameObject jugador;
+    public static GameManager Instance { get; private set; }
+    [field: SerializeField] public GameObject Player { get; private set; }
+
 
     private void Awake()
     {
-        instance = instance == null ? this : instance;
-        gameState = GameStates.mainmenu;
-        powerUps = new Dictionary<PowerUps, bool>() { { PowerUps.Betsy, false }, { PowerUps.Guantes, true }, { PowerUps.Hook, false} };
+        Instance = !Instance ? this : Instance;
+        if (Instance != this) Destroy(gameObject);
     }
 
-    private void Update()
+    public Vector2 GetPlayerPosition()
     {
-        
-        if (Input.GetButtonDown(Config.BUTTON_PAUSE))
-        {
-            Application.Quit();
-        }
-        
+        return Player.transform.position;
     }
 
-    /// <summary>Set TimeScale to 0 or 1 and GameState to pause or playing </summary><param name="_pause"> true : pause, false : continue</param>
-    public void PauseGame(bool _pause = true)
+    public float GetPlayerHeigth()
     {
-        gameState = _pause ? GameStates.pause : GameStates.playing;
+        var result = Player.transform.position.y;
+        result -= 0.5f;
+        return result;
     }
 }
-

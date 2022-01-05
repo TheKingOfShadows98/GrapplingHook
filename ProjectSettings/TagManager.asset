@@ -4,20 +4,19 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Solid
-  - Gancho
-  - Breakable
+  - Ground
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Build
   - Water
   - UI
-  - 
-  - 
+  - Enemy
+  - Particles
   - Player
-  - 
+  - hitbox
   - 
   - 
   - 
@@ -41,6 +40,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BackGround
+    uniqueID: 1447756867
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Particles
+    uniqueID: 1843743949
     locked: 0
