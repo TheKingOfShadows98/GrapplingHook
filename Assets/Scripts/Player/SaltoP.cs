@@ -10,6 +10,7 @@ namespace GrapplingHook.Player
         [SerializeField] Animator animator;
 
         [Header("Parametros de configuración")]
+        [SerializeField] private LayerMask JumpLayers;
         [Range(0, 1), SerializeField] private float coyoteTime;
         [SerializeField] private float LineDistance;
 
@@ -90,7 +91,7 @@ namespace GrapplingHook.Player
         {
             Vector2 start = (Vector2)transform.position + (Vector2.down * lineHeightOffset) + Vector2.left * (LineDistance / 2);
             Vector2 end = (Vector2)transform.position + (Vector2.down * lineHeightOffset) + Vector2.right * (LineDistance / 2);
-            var hit = Physics2D.Linecast(start, end);
+            var hit = Physics2D.Linecast(start, end, JumpLayers);
             if (hit.collider)
             {
                 if (hit.collider.CompareTag(GroundTag))
@@ -102,7 +103,7 @@ namespace GrapplingHook.Player
             }
             Vector2 start2 = (Vector2)transform.position + (Vector2.up * lineHeightOffset) + Vector2.left * (LineDistance / 2);
             Vector2 end2 = (Vector2)transform.position + (Vector2.up * lineHeightOffset) + Vector2.right * (LineDistance / 2);
-            var hit2 = Physics2D.Linecast(start2, end2);
+            var hit2 = Physics2D.Linecast(start2, end2, JumpLayers);
 
             if (hit2.collider) timeEndJump = Time.time;
         }
